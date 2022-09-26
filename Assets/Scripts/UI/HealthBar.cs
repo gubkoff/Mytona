@@ -11,6 +11,7 @@ public class HealthBar : MonoBehaviour,IMobComponent
     {
         var mob = GetComponent<Mob>();
         maxHP = mob.MaxHealth;
+        OnHPChange(mob.MaxHealth, 0);
         mob.OnHPChange += OnHPChange;
     }
 
