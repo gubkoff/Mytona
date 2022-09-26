@@ -1,18 +1,22 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerHealthBar : MonoBehaviour
 {
-	public GameObject Bar;
-	public SpriteRenderer BarImg;
-	public TMP_Text Text;
-	public TMP_Text DamageText;
-	private float maxHP;
+	[SerializeField] private GameObject Bar;
+	[SerializeField] private SpriteRenderer BarImg;
+	[SerializeField] private TMP_Text Text;
+	[SerializeField] private TMP_Text DamageText;
+	[SerializeField] private TMP_Text HealthChangeText;
+	[SerializeField] private float HealthChangeTextShowTime = 1;
 	private Player player;
 	private void Awake()
 	{
 		player = GetComponent<Player>();
 		player.OnHPChange += OnHPChange;
+		OnHPChange(player.MaxHealth, 0);
+		HealthChangeText.gameObject.SetActive(false);
 	}
 
 	public void OnDeath()
@@ -37,6 +41,20 @@ public class PlayerHealthBar : MonoBehaviour
 		{
 			Bar.SetActive(false);
 		}
+		StartCoroutine(ShowHealthChange(diff));
+	}
+
+	private IEnumerator ShowHealthChange(float diff) {
+		if(diff == 0)
+			yield break;
+		HealthChangeText.gameObject.SetActive(true);
+		HealthChangeText.text = HealthDiff(diff);
+		yield return new WaitForSeconds(HealthChangeTextShowTime);
+		HealthChangeText.gameObject.SetActive(false);
+	}
+
+	private string HealthDiff(float diff) {
+		return diff > 0 ? $"+{diff}" : diff.ToString();
 	}
 
 	private void OnUpgrade()

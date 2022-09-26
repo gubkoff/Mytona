@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         MaxHealth += hp;
         MoveSpeed += ms;
         OnUpgrade?.Invoke();
-        OnHPChange?.Invoke(Health, 0);
+        OnHPChange?.Invoke(Health, hp);
     }
 
     public void ChangeWeapon(int type)
