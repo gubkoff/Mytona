@@ -3,13 +3,7 @@ using UnityEngine;
 
 public class Rifle : PlayerWeapon
 {
-	public override int Type => PlayerWeapon.Rifle;
-	public Projectile BulletPrefab;
-	public float Reload = 1f;
-	public Transform FirePoint;
-	public ParticleSystem VFX;
-
-	protected float lastTime;
+	protected override int Type => Rifle;
 
 	protected override void Awake()
 	{
@@ -17,12 +11,7 @@ public class Rifle : PlayerWeapon
 		EventBus<PlayerInputMessage>.Sub(Fire);
 		lastTime = Time.time - Reload;
 	}
-
-	protected virtual float GetDamage()
-	{
-		return GetComponent<Player>().Damage;
-	}
-
+	
 	protected override async void Fire(PlayerInputMessage message)
 	{
 		if (Time.time - Reload < lastTime)
@@ -36,12 +25,12 @@ public class Rifle : PlayerWeapon
 		}
 
 		lastTime = Time.time;
-		GetComponent<PlayerAnimator>().TriggerShoot();
+		playerAnimator.TriggerShoot();
 
 		await Task.Delay(16);
 
 		var bullet = Instantiate(BulletPrefab, FirePoint.position, transform.rotation);
-		bullet.Damage = GetDamage();
+		bullet.SetDamage(GetDamage());
 		VFX.Play();
 	}
 }

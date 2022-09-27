@@ -1,21 +1,17 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-public class AutomaticRifle : PlayerWeapon
+public class Pistol : PlayerWeapon
 {
-	protected override int Type => AutomaticRifle;
-	
+	protected override int Type => Pistol;
+
 	protected override void Awake()
 	{
 		base.Awake();
+		EventBus<PlayerInputMessage>.Sub(Fire);
 		lastTime = Time.time - Reload;
 	}
-
-	protected override float GetDamage()
-	{
-		return player.Damage / 5f;
-	}
-
+	
 	protected override async void Fire(PlayerInputMessage message)
 	{
 		if (Time.time - Reload < lastTime)

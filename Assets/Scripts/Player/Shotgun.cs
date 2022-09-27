@@ -3,23 +3,12 @@ using UnityEngine;
 
 public class Shotgun : PlayerWeapon
 {
-	public override int Type => PlayerWeapon.Shotgun;
-	public Projectile BulletPrefab;
-	public float Reload = 1f;
-	public Transform FirePoint;
-	public ParticleSystem VFX;
-
-	protected float lastTime;
+	protected override int Type => Shotgun;
 
 	protected override void Awake()
 	{
 		base.Awake();
 		lastTime = Time.time - Reload;
-	}
-
-	protected virtual float GetDamage()
-	{
-		return GetComponent<Player>().Damage;
 	}
 
 	protected override async void Fire(PlayerInputMessage message)
@@ -35,14 +24,14 @@ public class Shotgun : PlayerWeapon
 		}
 
 		lastTime = Time.time;
-		GetComponent<PlayerAnimator>().TriggerShoot();
+		playerAnimator.TriggerShoot();
 
 		await Task.Delay(16);
 		var directions = SpreadDirections(transform.rotation.eulerAngles, 3, 20);
 		foreach (var direction in directions)
 		{
 			var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.Euler(direction));
-			bullet.Damage = GetDamage();
+			bullet.SetDamage(GetDamage());
 			
 		}
 		VFX.Play();
