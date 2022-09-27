@@ -8,16 +8,14 @@ public abstract class PlayerWeapon : MonoBehaviour
 	protected const int Pistol = 3;
 	protected abstract int Type { get; }
 	
-	public Projectile BulletPrefab;
-	public float Reload = 1f;
-	public Transform FirePoint;
-	public ParticleSystem VFX;
-	
-	
+	[SerializeField] protected Projectile BulletPrefab;
+	[SerializeField] protected float Reload = 1f;
+	[SerializeField] protected Transform FirePoint;
+	[SerializeField] protected ParticleSystem VFX;
+	[SerializeField] protected GameObject Model;
+
 	protected float lastTime;
 	
-	public GameObject Model;
-
 	protected Player player;
 	protected PlayerAnimator playerAnimator;
 
@@ -37,7 +35,7 @@ public abstract class PlayerWeapon : MonoBehaviour
 		return player.Damage;
 	}
 
-	protected void Change(int type)
+	private void Change(int type)
 	{
 		EventBus<PlayerInputMessage>.Unsub(Fire);
 		if (type == Type)
