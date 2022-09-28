@@ -7,15 +7,17 @@ public class PlayerAnimator : MonoBehaviour
 	
 	private void Awake()
 	{
-		EventBus<PlayerInputMessage>.Sub((message) =>
-		{
-			Animator.SetBool("IsRun",message.MovementDirection.sqrMagnitude > 0);
-		});
+		EventBus<PlayerInputMessage>.Sub(AnimatePlayer);
 		EventBus.Sub(AnimateDeath,EventBus.PLAYER_DEATH);
+	}
+
+	private void AnimatePlayer(PlayerInputMessage message) {
+		Animator.SetBool("IsRun",message.MovementDirection.sqrMagnitude > 0);
 	}
 
 	private void OnDestroy()
 	{
+		EventBus<PlayerInputMessage>.Unsub(AnimatePlayer);
 		EventBus.Unsub(AnimateDeath,EventBus.PLAYER_DEATH);
 	}
 
