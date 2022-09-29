@@ -1,4 +1,5 @@
 ﻿using System;
+using Mytona.MobCharacter;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,10 +10,12 @@ public class MobMover : MonoBehaviour,IMobComponent
 	private Vector3 targetPosition = Vector3.zero;
 	public bool Active = true;
 	private MobAnimator mobAnimator;
+	private MobAttack mobAttack;
 
 	private void Awake()
 	{
 		mobAnimator = GetComponent<MobAnimator>();
+		mobAttack = GetComponent<MobAttack>();
 		PickRandomPosition();
 		EventBus.Sub(OnDeath,EventBus.PLAYER_DEATH);
 	}
@@ -38,10 +41,9 @@ public class MobMover : MonoBehaviour,IMobComponent
 			}
 
 			var direction = (targetPosition - transform.position).Flat().normalized;
-        
+	        
 			transform.SetPositionAndRotation(transform.position + direction * Time.deltaTime * MoveSpeed, Quaternion.LookRotation(direction, Vector3.up));
 		}
-
 		mobAnimator.SetIsRun(Active);
 	}
 

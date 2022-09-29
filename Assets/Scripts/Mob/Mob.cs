@@ -10,11 +10,9 @@ namespace Mytona.MobCharacter {
         [SerializeField] private float MoveSpeed = 3.5f;
 
         [SerializeField] private float Health = 3;
-        
-        [SerializeField] private float TimeExistAfterDeath = 2;
-
         //TODO change
         public float MaxHealth = 3;
+        [SerializeField] private float TimeExistAfterDeath = 2;
 
         public Action<float, float> OnHPChange = null;
 

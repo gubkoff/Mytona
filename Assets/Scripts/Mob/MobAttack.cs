@@ -22,11 +22,12 @@ namespace Mytona.MobCharacter {
             mover = GetComponent<MobMover>();
             mobAnimator = GetComponent<MobAnimator>();
             EventBus.Sub(OnDeath, EventBus.PLAYER_DEATH);
+            EventBus.Sub(Shoot, EventBus.MOB_SHOOT);
             AttackIndicatorState(false);
         }
 
         protected virtual void Update() {
-            if (attacking) {
+            if (IsAttacking()) {
                 return;
             }
 
@@ -39,6 +40,10 @@ namespace Mytona.MobCharacter {
 
         protected virtual void OnDestroy() {
             EventBus.Unsub(OnDeath, EventBus.PLAYER_DEATH);
+        }
+
+        public bool IsAttacking() {
+            return attacking;
         }
 
         protected virtual IEnumerator Attack() {
@@ -55,6 +60,10 @@ namespace Mytona.MobCharacter {
             if (AttackIndicator != null) {
                 AttackIndicator.transform.rotation = Camera.main.transform.rotation;
             }
+        }
+        
+        protected virtual void Shoot() {
+            
         }
 
         public void OnDeath() {

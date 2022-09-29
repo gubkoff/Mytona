@@ -1,14 +1,19 @@
-﻿using UnityEngine;
+﻿using Mytona.MobCharacter;
+using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-	public float Damage;
-	public float Speed = 8;
-	public bool DamagePlayer = false;
-	public bool DamageMob;
-	public float TimeToLive = 5f;
-	private float timer = 0f;
-	private bool destroyed = false;
+	[SerializeField] protected float Damage;
+	[SerializeField] private float Speed = 8;
+	[SerializeField] protected bool DamagePlayer = false;
+	[SerializeField] protected bool DamageMob;
+	[SerializeField] private float TimeToLive = 5f;
+	[SerializeField] private float timer = 0f;
+	[SerializeField] protected bool destroyed = false;
+
+	public void SetDamage(float damage) {
+		Damage = damage;
+	}
 
 	protected virtual void OnTriggerEnter(Collider other)
 	{
