@@ -1,15 +1,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class ExplosionLifetime : MonoBehaviour {
-    [SerializeField] private float Lifetime;
+namespace Mytona.Utils {
+    public class ExplosionLifetime : MonoBehaviour {
+        [SerializeField] private float lifetime;
 
-    private void OnEnable() {
-        StartCoroutine(WaitAndDestroy());
-    }
+        private void OnEnable() {
+            StartCoroutine(WaitAndDestroy());
+        }
 
-    private IEnumerator WaitAndDestroy() {
-        yield return new WaitForSeconds(Lifetime);
-        Destroy(gameObject);
+        private IEnumerator WaitAndDestroy() {
+            yield return new WaitForSeconds(lifetime);
+            Destroy(gameObject);
+        }
     }
 }

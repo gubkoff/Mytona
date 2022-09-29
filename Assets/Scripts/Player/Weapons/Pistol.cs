@@ -1,36 +1,33 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-public class Pistol : PlayerWeapon
-{
-	protected override int Type => Pistol;
+namespace Mytona.PlayerCharacter.Weapons {
+	public class Pistol : PlayerWeapon {
+		protected override int Type => PISTOL;
 
-	protected override void Awake()
-	{
-		base.Awake();
-		EventBus<PlayerInputMessage>.Sub(Fire);
-		lastTime = Time.time - Reload;
-	}
-	
-	protected override async void Fire(PlayerInputMessage message)
-	{
-		if (Time.time - Reload < lastTime)
-		{
-			return;
+		protected override void Awake() {
+			base.Awake();
+			EventBus<PlayerInputMessage>.Sub(Fire);
+			lastTime = Time.time - reload;
 		}
 
-		if (!message.Fire)
-		{
-			return;
+		protected override async void Fire(PlayerInputMessage message) {
+			if (Time.time - reload < lastTime) {
+				return;
+			}
+
+			if (!message.Fire) {
+				return;
+			}
+
+			lastTime = Time.time;
+			playerAnimator.TriggerShoot();
+
+			await Task.Delay(16);
+
+			var bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+			bullet.Damage = GetDamage();
+			vfx.Play();
 		}
-
-		lastTime = Time.time;
-		playerAnimator.TriggerShoot();
-
-		await Task.Delay(16);
-
-		var bullet = Instantiate(BulletPrefab, FirePoint.position, transform.rotation);
-		bullet.SetDamage(GetDamage());
-		VFX.Play();
 	}
 }

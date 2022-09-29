@@ -1,64 +1,62 @@
 ﻿using System.Collections;
+using Mytona.PlayerCharacter;
 using TMPro;
 using UnityEngine;
 
-public class PlayerHealthBar : MonoBehaviour
-{
-	[SerializeField] private GameObject Bar;
-	[SerializeField] private SpriteRenderer BarImg;
-	[SerializeField] private TMP_Text Text;
-	[SerializeField] private TMP_Text DamageText;
-	[SerializeField] private TMP_Text HealthChangeText;
-	[SerializeField] private float HealthChangeTextShowTime = 1;
-	private Player player;
-	private void Awake()
-	{
-		player = GetComponent<Player>();
-		player.OnHPChange += OnHPChange;
-		OnHPChange(player.GetMaxHealth(), 0);
-		HealthChangeText.gameObject.SetActive(false);
-	}
+namespace Mytona.UI {
+	public class PlayerHealthBar : MonoBehaviour {
+		[SerializeField] private GameObject bar;
+		[SerializeField] private SpriteRenderer barImg;
+		[SerializeField] private TMP_Text text;
+		[SerializeField] private TMP_Text damageText;
+		[SerializeField] private TMP_Text healthChangeText;
+		[SerializeField] private float healthChangeTextShowTime = 1;
+		private Player player;
 
-	public void OnDeath()
-	{
-		Bar.SetActive(false);
-	}
-    
-	private void LateUpdate()
-	{
-		Bar.transform.rotation = Camera.main.transform.rotation;
-	}
-
-	private void OnHPChange(float health, float diff)
-	{
-		var frac = health / player.GetMaxHealth();
-		Text.text = $"{health:####}/{player.GetMaxHealth():####}";
-		BarImg.size = new Vector2(frac, BarImg.size.y);
-		var pos = BarImg.transform.localPosition;
-		pos.x = -(1 - frac) / 2;
-		BarImg.transform.localPosition = pos;
-		if (health <= 0)
-		{
-			Bar.SetActive(false);
+		private void Awake() {
+			player = GetComponent<Player>();
+			player.OnHPChange += OnHPChange;
+			OnHPChange(player.GetMaxHealth(), 0);
+			healthChangeText.gameObject.SetActive(false);
 		}
-		StartCoroutine(ShowHealthChange(diff));
-	}
 
-	private IEnumerator ShowHealthChange(float diff) {
-		if(diff == 0)
-			yield break;
-		HealthChangeText.gameObject.SetActive(true);
-		HealthChangeText.text = HealthDiff(diff);
-		yield return new WaitForSeconds(HealthChangeTextShowTime);
-		HealthChangeText.gameObject.SetActive(false);
-	}
+		public void OnDeath() {
+			bar.SetActive(false);
+		}
 
-	private string HealthDiff(float diff) {
-		return diff > 0 ? $"+{diff}" : diff.ToString();
-	}
+		private void LateUpdate() {
+			bar.transform.rotation = Camera.main.transform.rotation;
+		}
 
-	private void OnUpgrade()
-	{
-		DamageText.text = $"{player.GetDamage()}";
+		private void OnHPChange(float health, float diff) {
+			var frac = health / player.GetMaxHealth();
+			text.text = $"{health:####}/{player.GetMaxHealth():####}";
+			barImg.size = new Vector2(frac, barImg.size.y);
+			var pos = barImg.transform.localPosition;
+			pos.x = -(1 - frac) / 2;
+			barImg.transform.localPosition = pos;
+			if (health <= 0) {
+				bar.SetActive(false);
+			}
+
+			StartCoroutine(ShowHealthChange(diff));
+		}
+
+		private IEnumerator ShowHealthChange(float diff) {
+			if (diff == 0)
+				yield break;
+			healthChangeText.gameObject.SetActive(true);
+			healthChangeText.text = HealthDiff(diff);
+			yield return new WaitForSeconds(healthChangeTextShowTime);
+			healthChangeText.gameObject.SetActive(false);
+		}
+
+		private string HealthDiff(float diff) {
+			return diff > 0 ? $"+{diff}" : diff.ToString();
+		}
+
+		private void OnUpgrade() {
+			damageText.text = $"{player.GetDamage()}";
+		}
 	}
 }

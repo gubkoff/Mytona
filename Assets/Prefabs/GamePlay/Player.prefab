@@ -623,10 +623,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7625363e0a26848438b4557fdb6325b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
-  MoveSpeed: 3.5
-  Health: 3
-  MaxHealth: 3
+  damage: 1
+  moveSpeed: 3.5
+  health: 3
+  maxHealth: 3
 --- !u!114 &4676656098883435533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce829f0604c545d796c8c85c0585d71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 3393315500599133633}
+  animator: {fileID: 3393315500599133633}
 --- !u!114 &4676656098883435530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,11 +664,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c75da90c45e4dffba7481630bd0d37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
-  Reload: 1
-  FirePoint: {fileID: 8757437627605290499}
-  VFX: {fileID: 8596535854419323934}
-  Model: {fileID: 8232909564386696073}
+  model: {fileID: 8232909564386696073}
+  bulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
+  reload: 1
+  firePoint: {fileID: 8757437627605290499}
+  vfx: {fileID: 8596535854419323934}
 --- !u!114 &8695024641537140716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,11 +681,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20885417364142f6a0d640be77d7a3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
-  Reload: 0.1
-  FirePoint: {fileID: 6020262465178978302}
-  VFX: {fileID: 6722159138903909859}
-  Model: {fileID: 6360706026106163828}
+  model: {fileID: 6360706026106163828}
+  bulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
+  reload: 0.1
+  firePoint: {fileID: 6020262465178978302}
+  vfx: {fileID: 6722159138903909859}
 --- !u!114 &2702698227460959680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,11 +698,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74907e518f3b45e09033179d2222f1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
-  Reload: 1
-  FirePoint: {fileID: 2260498809953985467}
-  VFX: {fileID: 1268690730262397350}
-  Model: {fileID: 1483767914143348273}
+  model: {fileID: 1483767914143348273}
+  bulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
+  reload: 1
+  firePoint: {fileID: 2260498809953985467}
+  vfx: {fileID: 1268690730262397350}
 --- !u!114 &3009290071435417938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,11 +715,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f61297eaecd644f3b64ddf0a74aad92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
-  Reload: 1
-  FirePoint: {fileID: 5039432179631484565}
-  VFX: {fileID: 5416145976098573448}
-  Model: {fileID: 5631232779367332639}
+  model: {fileID: 5631232779367332639}
+  bulletPrefab: {fileID: 7677098091910664037, guid: 7782763ea11567249bbd7e943ecc2dae, type: 3}
+  reload: 1
+  firePoint: {fileID: 5039432179631484565}
+  vfx: {fileID: 5416145976098573448}
 --- !u!114 &8748311606204659018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,12 +732,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce31021e8abf40cf96b44fd4ece25d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bar: {fileID: 4517173414755579628}
-  BarImg: {fileID: 1374325672164140156}
-  Text: {fileID: 7211429648804452570}
-  DamageText: {fileID: 3552508208379785938}
-  HealthChangeText: {fileID: 8182512140339135676}
-  HealthChangeTextShowTime: 1
+  bar: {fileID: 4517173414755579628}
+  barImg: {fileID: 1374325672164140156}
+  text: {fileID: 7211429648804452570}
+  damageText: {fileID: 3552508208379785938}
+  healthChangeText: {fileID: 8182512140339135676}
+  healthChangeTextShowTime: 1
 --- !u!114 &8531572476433862321
 MonoBehaviour:
   m_ObjectHideFlags: 0

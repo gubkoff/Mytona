@@ -1,49 +1,48 @@
-﻿using UnityEngine;
+﻿using Mytona.Ammo;
+using UnityEngine;
 
-public abstract class PlayerWeapon : MonoBehaviour
-{
-	protected const int Rifle = 0;
-	protected const int Shotgun = 1;
-	protected const int AutomaticRifle = 2;
-	protected const int Pistol = 3;
-	protected abstract int Type { get; }
-	
-	[SerializeField] protected Projectile BulletPrefab;
-	[SerializeField] protected float Reload = 1f;
-	[SerializeField] protected Transform FirePoint;
-	[SerializeField] protected ParticleSystem VFX;
-	[SerializeField] protected GameObject Model;
+namespace Mytona.PlayerCharacter.Weapons {
+	public abstract class PlayerWeapon : MonoBehaviour {
+		protected const int RIFLE = 0;
+		protected const int SHOTGUN = 1;
+		protected const int AUTOMATIC_RIFLE = 2;
+		protected const int PISTOL = 3;
+		protected abstract int Type { get; }
 
-	protected float lastTime;
-	
-	protected Player player;
-	protected PlayerAnimator playerAnimator;
+		[SerializeField] protected GameObject model;
+		[SerializeField] protected Projectile bulletPrefab;
+		[SerializeField] protected float reload = 1f;
+		[SerializeField] protected Transform firePoint;
+		[SerializeField] protected ParticleSystem vfx;
+		
+		protected float lastTime;
 
-	protected virtual void Awake() {
-		player = GetComponent<Player>();
-		playerAnimator = GetComponent<PlayerAnimator>();
-		player.OnWeaponChange += Change;
-	}
+		protected Player player;
+		protected PlayerAnimator playerAnimator;
 
-	protected virtual void OnDestroy()
-	{
-		EventBus<PlayerInputMessage>.Unsub(Fire);
-	}
-	
-	protected virtual float GetDamage()
-	{
-		return player.GetDamage();
-	}
-
-	private void Change(int type)
-	{
-		EventBus<PlayerInputMessage>.Unsub(Fire);
-		if (type == Type)
-		{
-			EventBus<PlayerInputMessage>.Sub(Fire);
+		protected virtual void Awake() {
+			player = GetComponent<Player>();
+			playerAnimator = GetComponent<PlayerAnimator>();
+			player.OnWeaponChange += Change;
 		}
-		Model.SetActive(type == Type);
-	}
 
-	protected abstract void Fire(PlayerInputMessage message);
+		protected virtual void OnDestroy() {
+			EventBus<PlayerInputMessage>.Unsub(Fire);
+		}
+
+		protected virtual float GetDamage() {
+			return player.GetDamage();
+		}
+
+		private void Change(int type) {
+			EventBus<PlayerInputMessage>.Unsub(Fire);
+			if (type == Type) {
+				EventBus<PlayerInputMessage>.Sub(Fire);
+			}
+
+			model.SetActive(type == Type);
+		}
+
+		protected abstract void Fire(PlayerInputMessage message);
+	}
 }

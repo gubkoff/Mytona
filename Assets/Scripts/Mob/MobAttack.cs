@@ -1,15 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
+using Mytona.PlayerCharacter;
+using Mytona.Utils;
 using UnityEngine;
 
 namespace Mytona.MobCharacter {
     [RequireComponent(typeof(MobMover))]
     [RequireComponent(typeof(Mob))]
     public abstract class MobAttack : MonoBehaviour {
-        [SerializeField] protected float AttackDistance = 1f;
-        [SerializeField] protected float DamageDistance = 1f;
-        [SerializeField] protected float AttackDelay = 1f;
-        [SerializeField] protected GameObject AttackIndicator;
+        [SerializeField] protected float attackDistance = 1f;
+        [SerializeField] protected float damageDistance = 1f;
+        [SerializeField] protected float attackDelay = 1f;
+        [SerializeField] protected GameObject attackIndicator;
 
         protected MobMover mover;
         protected Mob mob;
@@ -27,12 +28,12 @@ namespace Mytona.MobCharacter {
         }
 
         protected virtual void Update() {
-            if (IsAttacking()) {
+            if (attacking) {
                 return;
             }
 
             var playerDistance = (transform.position - Player.Instance.transform.position).Flat().magnitude;
-            if (playerDistance <= AttackDistance) {
+            if (playerDistance <= attackDistance) {
                 attacking = true;
                 _attackCoroutine = StartCoroutine(Attack());
             }
@@ -42,23 +43,19 @@ namespace Mytona.MobCharacter {
             EventBus.Unsub(OnDeath, EventBus.PLAYER_DEATH);
         }
 
-        public bool IsAttacking() {
-            return attacking;
-        }
-
         protected virtual IEnumerator Attack() {
             yield break;
         }
 
         protected void AttackIndicatorState(bool state) {
-            if (AttackIndicator != null) {
-                AttackIndicator.SetActive(state);
+            if (attackIndicator != null) {
+                attackIndicator.SetActive(state);
             }
         }
 
         protected void LateUpdate() {
-            if (AttackIndicator != null) {
-                AttackIndicator.transform.rotation = Camera.main.transform.rotation;
+            if (attackIndicator != null) {
+                attackIndicator.transform.rotation = Camera.main.transform.rotation;
             }
         }
         

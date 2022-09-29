@@ -1,22 +1,20 @@
 ﻿using UnityEngine;
 
-public class MobAnimator : MonoBehaviour,IMobComponent
-{
-	public Animator Animator;
-	public string AttackTrigger = "MeleeAttack";
+namespace Mytona.MobCharacter {
+	public class MobAnimator : MonoBehaviour, IMobComponent {
+		[SerializeField] private Animator animator;
+		[SerializeField] private string attackTrigger = "MeleeAttack";
 
-	public void StartAttackAnimation()
-	{
-		Animator.SetTrigger(AttackTrigger);
-	}
-	
-	public void SetIsRun(bool isRun)
-	{
-		Animator.SetBool("Run",isRun);
-	}
-	
-	public void OnDeath()
-	{
-		Animator.SetTrigger("Death");
+		public void StartAttackAnimation() {
+			animator.SetTrigger(attackTrigger);
+		}
+
+		public void SetIsRun(bool isRun) {
+			animator.SetBool("Run", isRun);
+		}
+
+		public void OnDeath() {
+			animator.SetTrigger("Death");
+		}
 	}
 }

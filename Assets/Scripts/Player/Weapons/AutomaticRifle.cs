@@ -1,40 +1,36 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-public class AutomaticRifle : PlayerWeapon
-{
-	protected override int Type => AutomaticRifle;
-	
-	protected override void Awake()
-	{
-		base.Awake();
-		lastTime = Time.time - Reload;
-	}
+namespace Mytona.PlayerCharacter.Weapons {
+	public class AutomaticRifle : PlayerWeapon {
+		protected override int Type => AUTOMATIC_RIFLE;
 
-	protected override float GetDamage()
-	{
-		return player.GetDamage() / 5f;
-	}
-
-	protected override async void Fire(PlayerInputMessage message)
-	{
-		if (Time.time - Reload < lastTime)
-		{
-			return;
+		protected override void Awake() {
+			base.Awake();
+			lastTime = Time.time - reload;
 		}
 
-		if (!message.Fire)
-		{
-			return;
+		protected override float GetDamage() {
+			return player.GetDamage() / 5f;
 		}
 
-		lastTime = Time.time;
-		playerAnimator.TriggerShoot();
+		protected override async void Fire(PlayerInputMessage message) {
+			if (Time.time - reload < lastTime) {
+				return;
+			}
 
-		await Task.Delay(16);
+			if (!message.Fire) {
+				return;
+			}
 
-		var bullet = Instantiate(BulletPrefab, FirePoint.position, transform.rotation);
-		bullet.SetDamage(GetDamage());
-		VFX.Play();
+			lastTime = Time.time;
+			playerAnimator.TriggerShoot();
+
+			await Task.Delay(16);
+
+			var bullet = Instantiate(bulletPrefab, firePoint.position, transform.rotation);
+			bullet.Damage = GetDamage();
+			vfx.Play();
+		}
 	}
 }

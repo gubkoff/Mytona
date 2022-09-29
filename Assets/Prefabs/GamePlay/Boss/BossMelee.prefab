@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8a2d064d344f1d9033bca81ce82bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SightDistance: 255
-  MoveSpeed: 2
-  Active: 1
+  sightDistance: 5
+  moveSpeed: 3.5
+  active: 1
 --- !u!114 &4318834868068814720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,10 +127,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed265e9693642af46ae96fdb3563aa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 3
-  MoveSpeed: 2
-  Health: 20
-  MaxHealth: 20
+  damage: 1
+  moveSpeed: 3.5
+  health: 3
+  maxHealth: 3
+  timeExistAfterDeath: 2
 --- !u!114 &4724009754537110917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,10 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5668c32497544150ad2551b8876d3ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackDistance: 1.4
-  DamageDistance: 1.4
-  AttackDelay: 1.5
-  AttackIndicator: {fileID: 5833643456852889257}
+  attackDistance: 1
+  damageDistance: 1
+  attackDelay: 1
+  attackIndicator: {fileID: 5833643456852889257}
 --- !u!114 &-8563377209872306545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486f553d70504dd0bb7c4aceed161ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 7806621724967398940}
-  AttackTrigger: Shoot
+  animator: {fileID: 7806621724967398940}
+  attackTrigger: MeleeAttack
 --- !u!114 &1805191792100682348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,9 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b09e6038e9256e499837574d5f8e750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bar: {fileID: 8790747055761963739}
-  BarImg: {fileID: 4576653210970038006}
-  Text: {fileID: 1249985871198295652}
+  bar: {fileID: 8790747055761963739}
+  barImg: {fileID: 4576653210970038006}
+  text: {fileID: 1249985871198295652}
 --- !u!1 &2551939337196754195
 GameObject:
   m_ObjectHideFlags: 0

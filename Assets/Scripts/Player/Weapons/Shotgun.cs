@@ -1,50 +1,44 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine;
 
-public class Shotgun : PlayerWeapon
-{
-	protected override int Type => Shotgun;
+namespace Mytona.PlayerCharacter.Weapons {
+	public class Shotgun : PlayerWeapon {
+		protected override int Type => SHOTGUN;
 
-	protected override void Awake()
-	{
-		base.Awake();
-		lastTime = Time.time - Reload;
-	}
-
-	protected override async void Fire(PlayerInputMessage message)
-	{
-		if (Time.time - Reload < lastTime)
-		{
-			return;
+		protected override void Awake() {
+			base.Awake();
+			lastTime = Time.time - reload;
 		}
 
-		if (!message.Fire)
-		{
-			return;
+		protected override async void Fire(PlayerInputMessage message) {
+			if (Time.time - reload < lastTime) {
+				return;
+			}
+
+			if (!message.Fire) {
+				return;
+			}
+
+			lastTime = Time.time;
+			playerAnimator.TriggerShoot();
+
+			await Task.Delay(16);
+			var directions = SpreadDirections(transform.rotation.eulerAngles, 3, 20);
+			foreach (var direction in directions) {
+				var bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(direction));
+				bullet.Damage = GetDamage();
+			}
+			vfx.Play();
 		}
 
-		lastTime = Time.time;
-		playerAnimator.TriggerShoot();
+		private Vector3[] SpreadDirections(Vector3 direction, int num, int spreadAngle) {
+			Vector3[] result = new Vector3[num];
+			result[0] = new Vector3(0, direction.y - (num - 1) * spreadAngle / 2, 0);
+			for (int i = 1; i < num; i++) {
+				result[i] = result[i - 1] + new Vector3(0, spreadAngle, 0);
+			}
 
-		await Task.Delay(16);
-		var directions = SpreadDirections(transform.rotation.eulerAngles, 3, 20);
-		foreach (var direction in directions)
-		{
-			var bullet = Instantiate(BulletPrefab, FirePoint.position, Quaternion.Euler(direction));
-			bullet.SetDamage(GetDamage());
-			
+			return result;
 		}
-		VFX.Play();
-	}
-	
-	public Vector3[] SpreadDirections(Vector3 direction, int num, int spreadAngle)
-	{
-		Vector3[] result = new Vector3[num];
-		result[0] = new Vector3(0,direction.y - (num-1) *spreadAngle/2,0);
-		for (int i = 1; i < num; i++)
-		{
-			result[i] = result[i - 1] + new Vector3(0,spreadAngle,0);
-		}
-		return result;
 	}
 }

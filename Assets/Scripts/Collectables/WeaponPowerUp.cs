@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using Mytona.PlayerCharacter;
+using UnityEngine;
 
-public class WeaponPowerUp : MonoBehaviour
-{
-	public int Type;
+namespace Mytona.Collectables {
+	public class WeaponPowerUp : MonoBehaviour {
+		[SerializeField] private int type;
 
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.CompareTag("Player"))
-		{
-			other.GetComponent<Player>().ChangeWeapon(Type);
-			Destroy(gameObject);
+		private void OnTriggerEnter(Collider other) {
+			if (other.CompareTag("Player")) {
+				other.GetComponent<Player>().ChangeWeapon(type);
+				Destroy(gameObject);
+			}
 		}
 	}
 }

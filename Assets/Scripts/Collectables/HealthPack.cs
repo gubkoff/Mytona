@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using Mytona.PlayerCharacter;
+using UnityEngine;
 
-public class HealthPack : MonoBehaviour
-{
-	public int Health;
-	private void OnTriggerEnter(Collider other)
+namespace Mytona.Collectables {
+	public class HealthPack : MonoBehaviour
 	{
-		if (other.CompareTag("Player"))
+		[SerializeField] private int health;
+		private void OnTriggerEnter(Collider other)
 		{
-			other.GetComponent<Player>().Heal(Health);
-			Destroy(gameObject);
+			if (other.CompareTag("Player"))
+			{
+				other.GetComponent<Player>().Heal(health);
+				Destroy(gameObject);
+			}
 		}
 	}
 }

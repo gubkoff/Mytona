@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections;
-using Unity.Mathematics;
+﻿using System.Collections;
+using Mytona.PlayerCharacter;
+using Mytona.Utils;
 using UnityEngine;
 
 namespace Mytona.MobCharacter {
     public class MeleeAttack : MobAttack, IMobComponent {
         protected override IEnumerator Attack() {
-            Debug.Log("ATTACK");
             AttackIndicatorState(true);
             mobAnimator.StartAttackAnimation();
             mover.Active = false;
-            yield return new WaitForSeconds(AttackDelay);
+            yield return new WaitForSeconds(attackDelay);
             AttackIndicatorState(false);
             var playerDistance = (transform.position - Player.Instance.transform.position).Flat().magnitude;
-            if (playerDistance <= DamageDistance) {
+            if (playerDistance <= damageDistance) {
                 Player.Instance.TakeDamage(mob.Damage);
             }
 

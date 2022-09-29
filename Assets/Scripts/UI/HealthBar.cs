@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Mytona.UI {
     public class HealthBar : MonoBehaviour, IMobComponent {
-        [SerializeField] private GameObject Bar;
-        [SerializeField] private SpriteRenderer BarImg;
-        [SerializeField] private TMP_Text Text;
+        [SerializeField] private GameObject bar;
+        [SerializeField] private SpriteRenderer barImg;
+        [SerializeField] private TMP_Text text;
         private float maxHP;
 
         private void Awake() {
@@ -17,20 +17,20 @@ namespace Mytona.UI {
         }
 
         public void OnDeath() {
-            Bar.SetActive(false);
+            bar.SetActive(false);
         }
 
         private void LateUpdate() {
-            Bar.transform.rotation = Camera.main.transform.rotation;
+            bar.transform.rotation = Camera.main.transform.rotation;
         }
 
         private void OnHPChange(float health, float diff) {
             var frac = health / maxHP;
-            Text.text = $"{health:####}/{maxHP:####}";
-            BarImg.size = new Vector2(frac, BarImg.size.y);
-            var pos = BarImg.transform.localPosition;
+            text.text = $"{health:####}/{maxHP:####}";
+            barImg.size = new Vector2(frac, barImg.size.y);
+            var pos = barImg.transform.localPosition;
             pos.x = -(1 - frac) / 2;
-            BarImg.transform.localPosition = pos;
+            barImg.transform.localPosition = pos;
         }
     }
 }

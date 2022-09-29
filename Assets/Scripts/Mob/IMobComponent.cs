@@ -1,4 +1,5 @@
-﻿public interface IMobComponent
-{
-	void OnDeath();
+﻿namespace Mytona.MobCharacter {
+	public interface IMobComponent {
+		void OnDeath();
+	}
 }

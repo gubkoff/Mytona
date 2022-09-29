@@ -1,40 +1,39 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Mytona.MobCharacter {
     public class Mob : MonoBehaviour {
-        //TODO change
-        public float Damage = 1;
-        [SerializeField] private float MoveSpeed = 3.5f;
-
-        [SerializeField] private float Health = 3;
-        //TODO change
-        public float MaxHealth = 3;
-        [SerializeField] private float TimeExistAfterDeath = 2;
+        [SerializeField] private float damage = 1;
+        [SerializeField] private float moveSpeed = 3.5f;
+        [SerializeField] private float health = 3;
+        [SerializeField] private float maxHealth = 3;
+        [SerializeField] private float timeExistAfterDeath = 2;
 
         public Action<float, float> OnHPChange = null;
 
+        public float Damage => damage;
+        public float MaxHealth => maxHealth;
+
         public void TakeDamage(float amount) {
-            if (Health <= 0)
+            if (health <= 0)
                 return;
-            Health -= amount;
-            OnHPChange?.Invoke(Health, -amount);
-            if (Health <= 0) {
+            health -= amount;
+            OnHPChange?.Invoke(health, -amount);
+            if (health <= 0) {
                 Death();
             }
         }
 
         public void Heal(float amount) {
-            if (Health <= 0)
+            if (health <= 0)
                 return;
-            Health += amount;
-            if (Health > MaxHealth) {
-                Health = MaxHealth;
+            health += amount;
+            if (health > maxHealth) {
+                health = maxHealth;
             }
 
-            OnHPChange?.Invoke(Health, amount);
+            OnHPChange?.Invoke(health, amount);
         }
 
         public void Death() {
@@ -50,7 +49,7 @@ namespace Mytona.MobCharacter {
         }
 
         private IEnumerator ClearAfterDeath() {
-            yield return new WaitForSeconds(TimeExistAfterDeath);
+            yield return new WaitForSeconds(timeExistAfterDeath);
             Destroy(gameObject);
         }
     }

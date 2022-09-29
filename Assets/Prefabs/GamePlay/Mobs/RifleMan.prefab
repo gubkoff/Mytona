@@ -82,9 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb8a2d064d344f1d9033bca81ce82bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SightDistance: 5
-  MoveSpeed: 2
-  Active: 1
+  sightDistance: 5
+  moveSpeed: 2
+  active: 1
 --- !u!114 &8621619010077877276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed265e9693642af46ae96fdb3563aa86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 1
-  MoveSpeed: 3.5
-  Health: 3
-  MaxHealth: 3
-  TimeExistAfterDeath: 2
+  damage: 1
+  moveSpeed: 3.5
+  health: 3
+  maxHealth: 3
+  timeExistAfterDeath: 2
 --- !u!114 &7983570968990229187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,13 +114,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4331a37eb345918afb325ff3905cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackDistance: 5
-  DamageDistance: 1
-  AttackDelay: 0.5
-  AttackIndicator: {fileID: 7138396621111421404}
-  AttackCooldown: 1
-  Bullet: {fileID: 7677098091910664037, guid: d532abb5319870b458402244467437d6, type: 3}
-  BulletSpawn: {fileID: 2482512970320796437}
+  attackDistance: 5
+  damageDistance: 1
+  attackDelay: 1
+  attackIndicator: {fileID: 7138396621111421404}
+  attackCooldown: 2
+  bullet: {fileID: 7677098091910664037, guid: d532abb5319870b458402244467437d6, type: 3}
+  bulletSpawn: {fileID: 2482512970320796437}
 --- !u!114 &1949625336525987856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486f553d70504dd0bb7c4aceed161ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 9026209752835179921}
-  AttackTrigger: Shoot
+  animator: {fileID: 9026209752835179921}
+  attackTrigger: Shoot
 --- !u!114 &2986155654844798439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b09e6038e9256e499837574d5f8e750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bar: {fileID: 3341069503190770202}
-  BarImg: {fileID: 7827556854209535975}
-  Text: {fileID: 1309087421792226861}
+  bar: {fileID: 3341069503190770202}
+  barImg: {fileID: 7827556854209535975}
+  text: {fileID: 1309087421792226861}
 --- !u!114 &6791231124646117049
 MonoBehaviour:
   m_ObjectHideFlags: 0
