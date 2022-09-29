@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mytona.MobCharacter;
 using UnityEngine;
 
-public class WeaponShoot : MonoBehaviour
-{
+public class WeaponShoot : MonoBehaviour {
+    [SerializeField] private MobAttack mobAttack;
     public void WeaponAttack() {
-        EventBus.Pub(EventBus.MOB_SHOOT);
+        mobAttack.Shoot();
     }
 
     public void WeaponEndAttack() {
-        Debug.Log("EEEEEEE");
     }
 }

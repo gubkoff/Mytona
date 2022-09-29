@@ -19,7 +19,7 @@ namespace Mytona.MobCharacter {
             _attackCoroutine = null;
         }
 
-        protected override void Shoot() {
+        public override void Shoot() {
             var bullet = Instantiate(Bullet, BulletSpawn.position, BulletSpawn.rotation);
             bullet.SetDamage(mob.Damage);
         }

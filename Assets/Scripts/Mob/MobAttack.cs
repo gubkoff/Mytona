@@ -62,7 +62,7 @@ namespace Mytona.MobCharacter {
             }
         }
         
-        protected virtual void Shoot() {
+        public virtual void Shoot() {
             
         }
 

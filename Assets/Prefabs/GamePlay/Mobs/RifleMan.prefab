@@ -101,6 +101,7 @@ MonoBehaviour:
   MoveSpeed: 3.5
   Health: 3
   MaxHealth: 3
+  TimeExistAfterDeath: 2
 --- !u!114 &7983570968990229187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,8 +118,9 @@ MonoBehaviour:
   DamageDistance: 1
   AttackDelay: 0.5
   AttackIndicator: {fileID: 7138396621111421404}
-  AttackCooldown: 2
+  AttackCooldown: 1
   Bullet: {fileID: 7677098091910664037, guid: d532abb5319870b458402244467437d6, type: 3}
+  BulletSpawn: {fileID: 2482512970320796437}
 --- !u!114 &1949625336525987856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +150,7 @@ MonoBehaviour:
   Bar: {fileID: 3341069503190770202}
   BarImg: {fileID: 7827556854209535975}
   Text: {fileID: 1309087421792226861}
---- !u!114 &8610088509026123635
+--- !u!114 &6791231124646117049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,9 +159,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2707459335502043896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8fc0c308b56455da9910850fbedbbba, type: 3}
+  m_Script: {fileID: 11500000, guid: 437e202b745c041c7bf7eb3be7f3ccf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobAttack: {fileID: 7983570968990229187}
 --- !u!1 &2858039567990526957
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,6 +646,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 849351562516072567, guid: 857a0124cbc5dc3489edd04f0382a520, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 857a0124cbc5dc3489edd04f0382a520, type: 3}
+--- !u!4 &2482512970320796437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1611881983, guid: 857a0124cbc5dc3489edd04f0382a520, type: 3}
+  m_PrefabInstance: {fileID: 2482512969785018090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6247406367366530033
 PrefabInstance:
   m_ObjectHideFlags: 0
