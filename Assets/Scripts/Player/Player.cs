@@ -6,10 +6,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-    public float Damage = 1;
-    public float MoveSpeed = 3.5f;
-    public float Health = 3;
-    public float MaxHealth = 3;
+    [SerializeField] private float Damage = 1;
+    [SerializeField] private float MoveSpeed = 3.5f;
+    [SerializeField] private float Health = 3;
+    [SerializeField] private float MaxHealth = 3;
 
     public Action<int> OnWeaponChange = null;
     public Action<float, float> OnHPChange = null;
@@ -25,6 +25,18 @@ public class Player : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+    public float GetDamage() {
+        return Damage;
+    } 
+    
+    public float GetMoveSpeed() {
+        return MoveSpeed;
+    }
+    
+    public float GetMaxHealth() {
+        return MaxHealth;
     }
 
     private void OnDestroy()

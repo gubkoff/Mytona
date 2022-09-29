@@ -32,7 +32,7 @@ public abstract class PlayerWeapon : MonoBehaviour
 	
 	protected virtual float GetDamage()
 	{
-		return player.Damage;
+		return player.GetDamage();
 	}
 
 	private void Change(int type)

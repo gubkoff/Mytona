@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public Camera Camera;
-    public Player Player;
+    [SerializeField] private Camera Camera;
+    [SerializeField] private Player Player;
 
     private void Awake()
     {

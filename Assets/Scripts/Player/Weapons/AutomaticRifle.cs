@@ -13,7 +13,7 @@ public class AutomaticRifle : PlayerWeapon
 
 	protected override float GetDamage()
 	{
-		return player.Damage / 5f;
+		return player.GetDamage() / 5f;
 	}
 
 	protected override async void Fire(PlayerInputMessage message)

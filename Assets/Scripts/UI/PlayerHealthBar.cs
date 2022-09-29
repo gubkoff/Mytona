@@ -15,7 +15,7 @@ public class PlayerHealthBar : MonoBehaviour
 	{
 		player = GetComponent<Player>();
 		player.OnHPChange += OnHPChange;
-		OnHPChange(player.MaxHealth, 0);
+		OnHPChange(player.GetMaxHealth(), 0);
 		HealthChangeText.gameObject.SetActive(false);
 	}
 
@@ -31,8 +31,8 @@ public class PlayerHealthBar : MonoBehaviour
 
 	private void OnHPChange(float health, float diff)
 	{
-		var frac = health / player.MaxHealth;
-		Text.text = $"{health:####}/{player.MaxHealth:####}";
+		var frac = health / player.GetMaxHealth();
+		Text.text = $"{health:####}/{player.GetMaxHealth():####}";
 		BarImg.size = new Vector2(frac, BarImg.size.y);
 		var pos = BarImg.transform.localPosition;
 		pos.x = -(1 - frac) / 2;
@@ -59,6 +59,6 @@ public class PlayerHealthBar : MonoBehaviour
 
 	private void OnUpgrade()
 	{
-		DamageText.text = $"{player.Damage}";
+		DamageText.text = $"{player.GetDamage()}";
 	}
 }
