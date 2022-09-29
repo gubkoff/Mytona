@@ -13524,7 +13524,7 @@ MonoBehaviour:
   Prefabs:
   - {fileID: 8269111731931150050, guid: cc578725d82238e4fb1ef9f17ca88333, type: 3}
   - {fileID: 8621619010077877276, guid: 90c92dc34fb16384b840b21616b792f0, type: 3}
-  - {fileID: 4318834868068814720, guid: fd202e94daaf41e4c998c63816729092, type: 3}
+  - {fileID: 8621619010077877276, guid: 466599ce8f3da492a8a7bdb0ebc024e6, type: 3}
 --- !u!114 &1909521373
 MonoBehaviour:
   m_ObjectHideFlags: 0
