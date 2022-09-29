@@ -58,14 +58,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f6ed41e784b84f718ddcab26221f6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 3
+  Damage: 1
   Speed: 8
-  DamagePlayer: 0
-  DamageMob: 0
+  DamagePlayer: 1
+  DamageMob: 1
   TimeToLive: 5
   timer: 0
   destroyed: 0
-  DamageRadius: 10
+  DamageRadius: 2
+  Explosion: {fileID: 100006, guid: e076683e0305e35498b8e8834978c0fa, type: 3}
 --- !u!1001 &2664410558431062766
 PrefabInstance:
   m_ObjectHideFlags: 0
