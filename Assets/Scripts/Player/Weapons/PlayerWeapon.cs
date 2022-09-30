@@ -34,7 +34,7 @@ namespace Mytona.PlayerCharacter.Weapons {
 		}
 
 		protected virtual float GetDamage() {
-			return player.GetDamage();
+			return player.Damage;
 		}
 
 		private void Change(WeaponType type) {

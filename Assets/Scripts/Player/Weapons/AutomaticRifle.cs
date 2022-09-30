@@ -11,7 +11,7 @@ namespace Mytona.PlayerCharacter.Weapons {
 		}
 
 		protected override float GetDamage() {
-			return player.GetDamage() / 5f;
+			return player.Damage / 5f;
 		}
 
 		protected override async void Fire(PlayerInputMessage message) {

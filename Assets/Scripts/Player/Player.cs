@@ -26,17 +26,9 @@ namespace Mytona.PlayerCharacter {
             }
         }
 
-        public float GetDamage() {
-            return damage;
-        }
-
-        public float GetMoveSpeed() {
-            return moveSpeed;
-        }
-
-        public float GetMaxHealth() {
-            return maxHealth;
-        }
+        public float Damage => damage;
+        public float MoveSpeed => moveSpeed;
+        public float MaxHealth => maxHealth;
 
         private void OnDestroy() {
             if (Instance == this) {

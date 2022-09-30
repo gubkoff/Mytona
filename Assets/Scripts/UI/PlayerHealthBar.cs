@@ -16,7 +16,8 @@ namespace Mytona.UI {
 		private void Awake() {
 			player = GetComponent<Player>();
 			player.OnHPChange += OnHPChange;
-			OnHPChange(player.GetMaxHealth(), 0);
+			player.OnUpgrade += OnUpgrade;
+			OnHPChange(player.MaxHealth, 0);
 			healthChangeText.gameObject.SetActive(false);
 		}
 
@@ -29,8 +30,8 @@ namespace Mytona.UI {
 		}
 
 		private void OnHPChange(float health, float diff) {
-			var frac = health / player.GetMaxHealth();
-			text.text = $"{health:####}/{player.GetMaxHealth():####}";
+			var frac = health / player.MaxHealth;
+			text.text = $"{health:####}/{player.MaxHealth:####}";
 			barImg.size = new Vector2(frac, barImg.size.y);
 			var pos = barImg.transform.localPosition;
 			pos.x = -(1 - frac) / 2;
@@ -56,7 +57,7 @@ namespace Mytona.UI {
 		}
 
 		private void OnUpgrade() {
-			damageText.text = $"{player.GetDamage()}";
+			damageText.text = $"{player.Damage}";
 		}
 	}
 }
