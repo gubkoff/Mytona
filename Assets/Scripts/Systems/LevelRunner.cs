@@ -8,9 +8,8 @@ namespace Mytona.Systems {
 		[SerializeField] private int maxMobCount = 5;
 		[SerializeField] private float spawnInterval = 2f;
 
-		[SerializeField] private List<LevelData> _levelDatas = null;
-
-		[SerializeField] private int _mobsCount = 0;
+		private List<LevelData> _levelDatas = null;
+		private int _mobsCount = 0;
 
 
 		private void Awake() {

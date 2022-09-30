@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Mytona.PlayerCharacter.Weapons {
 	public class Shotgun : PlayerWeapon {
-		protected override int Type => SHOTGUN;
+		protected override WeaponType Type => WeaponType.Shotgun;
 
 		protected override void Awake() {
 			base.Awake();

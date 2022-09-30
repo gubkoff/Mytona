@@ -13509,6 +13509,14 @@ MonoBehaviour:
   riflePrefab: {fileID: 802912271405016925, guid: c74f7ca528828694d96d08fb93f5b77d, type: 3}
   automaticRifleWPrefab: {fileID: 4866546695364694794, guid: 7d8c1fc07841e6345a83656c80f9e543, type: 3}
   shotgunPrefab: {fileID: 7155297609261215702, guid: d92fd0077718c3840b7f41c84a6b8c6f, type: 3}
+  spawnItems:
+  - {fileID: 11400000, guid: c1c93883143b740c2a38e7a1bb1c558c, type: 2}
+  - {fileID: 11400000, guid: 4af947ab5f16a4af081279e2d8ccc79b, type: 2}
+  - {fileID: 11400000, guid: 95c4cf743f6ff4c56b16d3c2d13109af, type: 2}
+  - {fileID: 11400000, guid: f59f9c97c4bd145a1bcd796846a7d172, type: 2}
+  - {fileID: 11400000, guid: 5c47ce2ddc33945008044c1d54f8c08f, type: 2}
+  - {fileID: 11400000, guid: cc68c766525ac4081ad59c2de4f7b6aa, type: 2}
+  - {fileID: 11400000, guid: b71c7673847b4486abdac32df1b31fa1, type: 2}
 --- !u!114 &1909521372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13537,10 +13545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e198a8980e0f45b3a366eb9017f26294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMobCount: 1
+  maxMobCount: 5
   spawnInterval: 2
-  _levelDatas: []
-  _mobsCount: 0
 --- !u!1 &1932138740
 GameObject:
   m_ObjectHideFlags: 0

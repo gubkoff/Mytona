@@ -1,13 +1,16 @@
 ﻿using Mytona.Ammo;
 using UnityEngine;
+public enum WeaponType {
+	None,
+	Rifle,
+	Shotgun,
+	AutomaticRifle,
+	Pistol
+}
 
 namespace Mytona.PlayerCharacter.Weapons {
 	public abstract class PlayerWeapon : MonoBehaviour {
-		protected const int RIFLE = 0;
-		protected const int SHOTGUN = 1;
-		protected const int AUTOMATIC_RIFLE = 2;
-		protected const int PISTOL = 3;
-		protected abstract int Type { get; }
+		protected abstract WeaponType Type { get; }
 
 		[SerializeField] protected GameObject model;
 		[SerializeField] protected Projectile bulletPrefab;
@@ -34,7 +37,7 @@ namespace Mytona.PlayerCharacter.Weapons {
 			return player.GetDamage();
 		}
 
-		private void Change(int type) {
+		private void Change(WeaponType type) {
 			EventBus<PlayerInputMessage>.Unsub(Fire);
 			if (type == Type) {
 				EventBus<PlayerInputMessage>.Sub(Fire);

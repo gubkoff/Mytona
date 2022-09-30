@@ -7,6 +7,7 @@ public static class EventBus
 	public const int PLAYER_DEATH = 0;
 	public const int PLAYER_WON = 1;
 	public const int MOB_KILLED = 2;
+	public const int MOB_SHOOT = 3;
 	public delegate void MessageHandlerDelegate();
 	private static Dictionary<int,MessageHandlerDelegate> MessageHandlers;
 
@@ -66,6 +67,7 @@ public static class EventBus<T> where T : Message
 	static EventBus()
 	{
 		MessageHandlers = new List<MessageHandlerDelegate>();
+		Handlers = null;
 	}
 
 	public static void Clear()

@@ -1,58 +1,76 @@
-﻿using Mytona.Collectables;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Mytona.Collectables;
+using Mytona.PlayerCharacter;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 //Bad class
 namespace Mytona.Systems {
 	public class PowerupSpawner : MonoBehaviour {
-		[Range(0, 100)] [SerializeField] private float healthUpgradeWeight = 10;
-		[Range(0, 100)] [SerializeField] private float damageUpgradeWeight = 10;
-		[Range(0, 100)] [SerializeField] private float moveSpeedUpgradeWeight = 5;
-		[Range(0, 100)] [SerializeField] private float healWeight = 25;
-		[Range(0, 100)] [SerializeField] private float weaponChangeWeight = 2;
-		[Range(0, 100)] [SerializeField] private float rifleWeight = 25;
-		[Range(0, 100)] [SerializeField] private float automaticRifleWeight = 15;
-		[Range(0, 100)] [SerializeField] private float shotgunWeight = 20;
+		private const float WEAPON_CHANGE_PROBABILITY_MAX = 100;
+		[Range(0, 100)] [SerializeField] private float weaponChangeProbability = 10;
+		
+		[SerializeField] private List<SpawnItem> spawnItems;
 
-		[SerializeField] private PowerUp healthPrefab;
-		[SerializeField] private PowerUp damagePowerUp;
-		[SerializeField] private PowerUp moveSpeedPrefab;
-		[SerializeField] private HealthPack healPrefab;
-		[SerializeField] private WeaponPowerUp riflePrefab;
-		[SerializeField] private WeaponPowerUp automaticRifleWPrefab;
-		[SerializeField] private WeaponPowerUp shotgunPrefab;
-
-		private float[] weights;
-		private float[] weaponWeights;
+		private Dictionary<int, int> chance;
 
 		private GameObject[] prefabs;
 		private WeaponPowerUp[] weaponPrefabs;
 
+		private List<GameObject> prefabList;
+
 		private void Awake() {
-			weights = new float[5];
-			weights[0] = healthUpgradeWeight;
-			weights[1] = weights[0] + damageUpgradeWeight;
-			weights[2] = weights[1] + moveSpeedUpgradeWeight;
-			weights[3] = weights[2] + healWeight;
-			weights[4] = weights[3] + weaponChangeWeight;
-
-			weaponWeights = new float[3];
-			weaponWeights[0] = rifleWeight;
-			weaponWeights[1] = weaponWeights[0] + automaticRifleWeight;
-			weaponWeights[2] = weaponWeights[1] + shotgunWeight;
-
-			prefabs = new[] {
-				healthPrefab.gameObject,
-				damagePowerUp.gameObject,
-				moveSpeedPrefab.gameObject,
-				healPrefab.gameObject
-			};
-			weaponPrefabs = new[] {
-				riflePrefab,
-				automaticRifleWPrefab,
-				shotgunPrefab
-			};
-
+			chance = GetChance(spawnItems);
 			EventBus.Sub(Handle, EventBus.MOB_KILLED);
+		}
+		
+		private Dictionary<int, int> GetChance(List<SpawnItem> probabilities) {
+			var result = new Dictionary<int, int>();
+			if (probabilities != null && probabilities.Count > 0) {
+				int tempSum = 0;
+				for (int i = 0; i < probabilities.Count; i++) {
+					tempSum += probabilities[i].Probability;
+					result[i] = tempSum;
+				}
+			}
+			return result;
+		}
+		
+		private int PowerUp() {
+			var newPowerUp = Random.Range(1, chance.Values.Max());
+			foreach (var item in chance.OrderBy(i => i.Key)) {
+				if (newPowerUp <= item.Value) {
+					return item.Key;
+				}
+			}
+			return -1;
+		}
+
+		private bool IsCorrectPowerUp(int powerUpIndex) {
+			if (!IsWeaponChange() && spawnItems[powerUpIndex].IsWeapon) {
+				return false;
+			}
+
+			if (spawnItems[powerUpIndex].WeaponType == Player.Instance.GetCurrentWeapon()) {
+				return false;
+			}
+
+			return true;
+		}
+
+		private bool IsWeaponChange() {
+			if (weaponChangeProbability > WEAPON_CHANGE_PROBABILITY_MAX) {
+				weaponChangeProbability = WEAPON_CHANGE_PROBABILITY_MAX;
+			}
+			var weaponChange = Random.Range(1, chance.Values.Max());
+			if (weaponChange <= weaponChangeProbability) {
+				return true;
+			}
+
+			return false;
 		}
 
 		private void Handle() {
@@ -66,26 +84,13 @@ namespace Mytona.Systems {
 			return vector3;
 		}
 
-
 		private void Spawn(Vector3 position) {
-			var rand = Random.value * weights[4];
-			int i = 0;
-			while (i < 5 && weights[i] >= rand) {
-				i++;
+			var powerUpIndex = PowerUp();
+			while (!IsCorrectPowerUp(powerUpIndex)) {
+				powerUpIndex = PowerUp();
 			}
 
-			if (i < 4) {
-				Instantiate(prefabs[Mathf.Min(3, i)], position, Quaternion.identity);
-			}
-			else {
-				rand = Random.value * weaponWeights[2];
-				i = 0;
-				while (i < 3 && weaponWeights[Mathf.Min(2, i)] >= rand) {
-					i++;
-				}
-
-				Instantiate(weaponPrefabs[Mathf.Min(2, i)], position, Quaternion.identity);
-			}
+			Instantiate(spawnItems[powerUpIndex].Prefab, position, Quaternion.identity);
 		}
 	}
 }

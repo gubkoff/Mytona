@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Mytona.Collectables {
 	public class WeaponPowerUp : MonoBehaviour {
-		[SerializeField] private int type;
+		[SerializeField] private WeaponType type;
 
 		private void OnTriggerEnter(Collider other) {
 			if (other.CompareTag("Player")) {

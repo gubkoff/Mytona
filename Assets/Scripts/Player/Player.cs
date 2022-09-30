@@ -11,9 +11,11 @@ namespace Mytona.PlayerCharacter {
         [SerializeField] private float health = 3;
         [SerializeField] private float maxHealth = 3;
 
-        public Action<int> OnWeaponChange = null;
+        public Action<WeaponType> OnWeaponChange = null;
         public Action<float, float> OnHPChange = null;
         public Action OnUpgrade = null;
+
+        private WeaponType weaponType = WeaponType.None;
 
         private void Awake() {
             if (Instance != null) {
@@ -74,8 +76,17 @@ namespace Mytona.PlayerCharacter {
             OnHPChange?.Invoke(health, hp);
         }
 
-        public void ChangeWeapon(int type) {
+        public void ChangeWeapon(WeaponType type) {
+            weaponType = type;
             OnWeaponChange?.Invoke(type);
+        }
+
+        public WeaponType GetCurrentWeapon() {
+            if (weaponType == WeaponType.None) {
+                return WeaponType.Pistol;
+            }
+
+            return weaponType;
         }
     }
 }
