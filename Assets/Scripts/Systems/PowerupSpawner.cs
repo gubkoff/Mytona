@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Mytona.Collectables;
 using Mytona.PlayerCharacter;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,15 +9,9 @@ namespace Mytona.Systems {
 	public class PowerupSpawner : MonoBehaviour {
 		private const float WEAPON_CHANGE_PROBABILITY_MAX = 100;
 		[Range(0, 100)] [SerializeField] private float weaponChangeProbability = 10;
-		
 		[SerializeField] private List<SpawnItem> spawnItems;
 
 		private Dictionary<int, int> chance;
-
-		private GameObject[] prefabs;
-		private WeaponPowerUp[] weaponPrefabs;
-
-		private List<GameObject> prefabList;
 
 		private void Awake() {
 			chance = GetChance(spawnItems);
